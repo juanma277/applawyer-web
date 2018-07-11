@@ -1,0 +1,70 @@
+<div class="row animated bounceInUp">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input #input (keyup)="buscarRuta(input.value)" type="text" class="form-control" placeholder="Buscar ruta ...">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="text-right">
+                    <button [routerLink]="['/ruta','nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                            <i class="fa fa-plus"> Crear Ruta</i>
+                    </button>
+                </div>
+
+                <h3 class="card-title">Rutas registradas(<small>{{totalRegistros}}</small>)</h3>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Ruta</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let ruta of rutas">
+                            <td><img (click)="actualizarImagen(ruta)" [src]="ruta.img | imagen:'rutas'" class="img-50 pointer"></td>
+                            <td>
+                                <input [(ngModel)]="ruta.nombre" name="nombre" type="text" class="form-control" required placeholder="Nombre de la ruta">
+                            </td>
+                            <td>
+                                <button (click)="guardarRuta(ruta)" class="btn btn-success">
+                                <i class="fa fa-save"></i>
+                              </button>
+
+                                <button [routerLink]="['/ruta',ruta._id ]" class="btn btn-warning">
+                                <i class="fa fa-edit"></i>
+                              </button>
+
+                                <button (click)="borrarRuta(ruta)" class="btn btn-danger">
+                                  <i class="fa fa-trash-o"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
+                        Anterior
+                </button>
+
+                <button (click)="cambiarDesde(5)" class="btn btn-secondary">
+                        Siguiente                    
+                </button>
+
+
+            </div>
+        </div>
+    </div>
+</div>
